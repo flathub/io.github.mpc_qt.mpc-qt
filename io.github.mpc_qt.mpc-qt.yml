@@ -110,8 +110,8 @@ modules:
 
             sources:
               - type: archive
-                url: https://github.com/vapoursynth/vapoursynth/archive/refs/tags/R70.tar.gz
-                sha256: 59c813ec36046be33812408ff00e16cae63c6843af6acf4e34595910a80e267b
+                url: https://github.com/vapoursynth/vapoursynth/archive/72.tar.gz
+                sha256: f8fcc5e2e9d2195454310e3356ea13e5334125891e452cc6543e985f28cacd22
                 x-checker-data:
                   type: anitya
                   project-id: 15982
@@ -147,8 +147,8 @@ modules:
               - -Ddemos=False
             sources:
               - type: archive
-                url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.349.0/libplacebo-v7.349.0.tar.gz
-                sha256: 79120e685a1836344b51b13b6a5661622486a84e4d4a35f6c8d01679a20fbc86
+                url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.351.0/libplacebo-v7.351.0.tar.gz
+                sha256: 4efe1c8d4da3c61295eb5fdfa50e6037409d8425eb3c15dd86788679c4ce59ee
                 x-checker-data:
                   type: anitya
                   project-id: 20101
@@ -188,8 +188,8 @@ modules:
               - --disable-static
             sources:
               - type: archive
-                url: https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz
-                sha256: da7c348deb6fa6c24507afab2dee7545ba5dd5bbf90a137bfe9e738f7df68537
+                url: https://github.com/libass/libass/releases/download/0.17.4/libass-0.17.4.tar.gz
+                sha256: a886b3b80867f437bc55cff3280a652bfa0d37b43d2aff39ddf3c4f288b8c5a8
                 x-checker-data:
                   type: anitya
                   project-id: 1560
@@ -230,8 +230,8 @@ modules:
               - name: hwdata
                 sources:
                   - type: archive
-                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.395.tar.gz
-                    sha256: 1166f733c57afa82cfdad56e62ef044835fbc8c99ef65f033e6a5802716b5c66
+                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.396.tar.gz
+                    sha256: 6ed6ff6eb9d137b9669af6966974643a015cf302a39237ef84dd2efa5e20bae8
                     x-checker-data:
                       type: anitya
                       project-id: 5387
