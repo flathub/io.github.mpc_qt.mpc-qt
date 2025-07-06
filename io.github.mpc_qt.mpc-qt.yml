@@ -35,7 +35,7 @@ finish-args:
   - --talk-name=org.freedesktop.ScreenSaver
   - --own-name=org.mpris.MediaPlayer2.MpcQt
   - --system-talk-name=org.freedesktop.UDisks2
-# Give access to legacy ~/.icons downloaded mouse cursor themes path, use full home folder to avoid finish-args-legacy-icon-folder-permission error
+# Access to home folder is needed for external subtitles and for downloaded mouse cursor
   - --filesystem=home:ro
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons:~/.icons
 cleanup:
