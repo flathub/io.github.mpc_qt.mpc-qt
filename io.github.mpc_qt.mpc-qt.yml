@@ -35,7 +35,7 @@ finish-args:
   - --talk-name=org.freedesktop.ScreenSaver
   - --own-name=org.mpris.MediaPlayer2.MpcQt
   - --system-talk-name=org.freedesktop.UDisks2
-# Give access to legacy ~/.icons downloaded mouse cursor themes path, use full home folder to avoid finish-args-legacy-icon-folder-permission error
+# Access to home folder is needed for external subtitles and for downloaded mouse cursor
   - --filesystem=home:ro
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons:~/.icons
 cleanup:
@@ -50,11 +50,14 @@ cleanup-commands:
 modules:
   - name: mpc-qt
     buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_PREFIX_PATH=/app/boost
+      - -DMPCQT_VERSION=25.07-flatpak
     sources:
       - type: git
         url: https://github.com/mpc-qt/mpc-qt.git
-        tag: v24.12.1-flatpak
-        commit: 3001fea1cffde1b349222da043a065713fda1fe1
+        tag: v25.07-flatpak
+        commit: 60458ad391ae5aee06bf2fc7d657585d0f43cd81
     modules:
       - name: libmpv
         cleanup:
@@ -255,3 +258,18 @@ modules:
               project-id: 143399
               stable-only: true
               url-template: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/$version.tar.gz
+
+      - name: boost
+        buildsystem: simple
+        build-commands:
+          - ./bootstrap.sh
+          - ./b2 install --prefix=/app/boost
+        sources:
+          - type: archive
+            url: https://github.com/boostorg/boost/releases/download/boost-1.88.0/boost-1.88.0-cmake.tar.gz
+            sha256: dcea50f40ba1ecfc448fdf886c0165cf3e525fef2c9e3e080b9804e8117b9694
+            x-checker-data:
+              type: anitya
+              project-id: 6845
+              stable-only: true
+              url-template: https://github.com/boostorg/boost/releases/download/boost-$version/boost-$version-cmake.tar.gz
