@@ -16,7 +16,7 @@ finish-args:
 # We support both Xwayland and Wayland (selectable in the Tweaks settings) because
 # Wayland doesn't allow centering the window after we resize it
   - --socket=x11
-#   - --socket=wayland
+  - --socket=wayland
   - --socket=pulseaudio
   - --device=dri
 # These can't be :ro to access subtitles when file opened from the app
