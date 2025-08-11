@@ -100,8 +100,8 @@ modules:
             sources:
               - type: git
                 url: https://github.com/openresty/luajit2.git
-                tag: v2.1-20250117
-                commit: 93162f34e7424cd0ea3c4046a9ffacce621626bc
+                tag: v2.1-20250529
+                commit: afc74313c6f919f713e2a25003cf0066852bb24a
                 x-checker-data:
                   type: git
                   tag-pattern: ^v([\d.-]+)$
@@ -115,8 +115,8 @@ modules:
 
             sources:
               - type: archive
-                url: https://github.com/vapoursynth/vapoursynth/archive/refs/tags/R70.tar.gz
-                sha256: 59c813ec36046be33812408ff00e16cae63c6843af6acf4e34595910a80e267b
+                url: https://github.com/vapoursynth/vapoursynth/archive/72.tar.gz
+                sha256: f8fcc5e2e9d2195454310e3356ea13e5334125891e452cc6543e985f28cacd22
                 x-checker-data:
                   type: anitya
                   project-id: 15982
@@ -152,8 +152,8 @@ modules:
               - -Ddemos=False
             sources:
               - type: archive
-                url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.349.0/libplacebo-v7.349.0.tar.gz
-                sha256: 79120e685a1836344b51b13b6a5661622486a84e4d4a35f6c8d01679a20fbc86
+                url: https://code.videolan.org/videolan/libplacebo/-/archive/v7.351.0/libplacebo-v7.351.0.tar.gz
+                sha256: 4efe1c8d4da3c61295eb5fdfa50e6037409d8425eb3c15dd86788679c4ce59ee
                 x-checker-data:
                   type: anitya
                   project-id: 20101
@@ -193,8 +193,8 @@ modules:
               - --disable-static
             sources:
               - type: archive
-                url: https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz
-                sha256: da7c348deb6fa6c24507afab2dee7545ba5dd5bbf90a137bfe9e738f7df68537
+                url: https://github.com/libass/libass/releases/download/0.17.4/libass-0.17.4.tar.gz
+                sha256: a886b3b80867f437bc55cff3280a652bfa0d37b43d2aff39ddf3c4f288b8c5a8
                 x-checker-data:
                   type: anitya
                   project-id: 1560
@@ -235,8 +235,8 @@ modules:
               - name: hwdata
                 sources:
                   - type: archive
-                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.395.tar.gz
-                    sha256: 1166f733c57afa82cfdad56e62ef044835fbc8c99ef65f033e6a5802716b5c66
+                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.398.tar.gz
+                    sha256: cd52f7eb5c0f438a3605d1799d9f345a2894ad0f269ab6e8441f55e27e80dd78
                     x-checker-data:
                       type: anitya
                       project-id: 5387
@@ -253,8 +253,8 @@ modules:
           - install yt-dlp /app/bin
         sources:
           - type: archive
-            url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2025.05.22.tar.gz
-            sha256: c09ad17e0b3d5f23af3948b4b3dc7e1a9781e66a9a4d93b7dc631803e538b137
+            url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2025.08.11.tar.gz
+            sha256: 54033f48ec1ba46bff219be985daa204d39671cc6ff43b41b0ac8503e21a831c
             x-checker-data:
               type: anitya
               project-id: 143399
