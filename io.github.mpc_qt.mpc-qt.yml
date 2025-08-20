@@ -133,8 +133,8 @@ modules:
                 sources:
                   - type: archive
                     archive-type: tar
-                    url: https://api.github.com/repos/sekrit-twc/zimg/tarball/release-3.0.5
-                    sha256: 1b8998f03f4a49e4d730033143722b32bc28a5306ef809ccfb3b4bbb29e4b784
+                    url: https://api.github.com/repos/sekrit-twc/zimg/tarball/release-3.0.6
+                    sha256: 15140e491c4ce9db5f02a038d8a1eb53e9151b55eeed06a2899425a6ebfef367
                     x-checker-data:
                       type: json
                       url: https://api.github.com/repos/sekrit-twc/zimg/releases/latest
@@ -239,8 +239,8 @@ modules:
               - install yt-dlp /app/bin
             sources:
               - type: archive
-                url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2025.08.11.tar.gz
-                sha256: 54033f48ec1ba46bff219be985daa204d39671cc6ff43b41b0ac8503e21a831c
+                url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2025.08.20.tar.gz
+                sha256: 2a98934dd1e0f613685c1670e5e75a9f5ae63c9728cf7e3fe13f39ed31e366af
                 x-checker-data:
                   type: anitya
                   project-id: 143399
@@ -254,8 +254,8 @@ modules:
           - ./b2 install variant=release link=shared runtime-link=shared --prefix=/app
         sources:
           - type: archive
-            url: https://github.com/boostorg/boost/releases/download/boost-1.88.0/boost-1.88.0-cmake.tar.gz
-            sha256: dcea50f40ba1ecfc448fdf886c0165cf3e525fef2c9e3e080b9804e8117b9694
+            url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-cmake.tar.gz
+            sha256: 954a01219bf818c7fb850fa610c2c8c71a4fa28fa32a1900056bcb6ff58cf908
             x-checker-data:
               type: anitya
               project-id: 6845
