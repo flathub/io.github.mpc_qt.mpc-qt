@@ -1,0 +1,17 @@
+diff --git a/ipc/http.cpp b/ipc/http.cpp
+index 9e0b452..f50be25 100644
+--- a/ipc/http.cpp
++++ b/ipc/http.cpp
+@@ -97,11 +97,10 @@ void HttpResponse::serveFile(QString filename)
+     filename.replace("..", ".");
+ 
+     QFile f(filename);
+-    if (!f.exists()) {
++    if (!f.exists() || !f.open(QIODevice::ReadOnly)) {
+         statusCode = HttpResponse::Http404NotFound;
+         return;
+     }
+-    f.open(QIODevice::ReadOnly);
+ 
+     auto extension = QFileInfo(filename).suffix();
+     contentType = HttpServer::extensionToContentType(extension);

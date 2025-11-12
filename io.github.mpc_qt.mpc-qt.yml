@@ -57,6 +57,8 @@ modules:
         url: https://github.com/mpc-qt/mpc-qt.git
         tag: v25.07-flatpak
         commit: 60458ad391ae5aee06bf2fc7d657585d0f43cd81
+      - type: patch
+        path: fix_qt_6.10_warning.diff
     modules:
       - name: libmpv
         cleanup:
