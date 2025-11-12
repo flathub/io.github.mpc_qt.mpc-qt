@@ -61,6 +61,7 @@ modules:
         paths:
           - add_keywords.diff
           - fix_qt_6.10_warning.diff
+          - add-quickjs-support.diff
     modules:
       - name: libmpv
         cleanup:
@@ -250,6 +251,23 @@ modules:
                   project-id: 143399
                   stable-only: true
                   url-template: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/$version.tar.gz
+
+      - name: quickjs
+        buildsystem: simple
+        build-commands:
+          - make
+          - make install PREFIX=/app
+        cleanup:
+          - /bin/qjsc
+        sources:
+          - type: archive
+            url: https://bellard.org/quickjs/quickjs-2025-09-13-2.tar.xz
+            sha256: 996c6b5018fc955ad4d06426d0e9cb713685a00c825aa5c0418bd53f7df8b0b4
+            x-checker-data:
+              type: anitya
+              project-id: 138263
+              stable-only: true
+              url-template: https://bellard.org/quickjs/quickjs-$version.tar.xz
 
       - name: boost
         buildsystem: simple
