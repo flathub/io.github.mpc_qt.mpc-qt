@@ -57,6 +57,10 @@ modules:
         url: https://github.com/mpc-qt/mpc-qt.git
         tag: v25.07-flatpak
         commit: 60458ad391ae5aee06bf2fc7d657585d0f43cd81
+      - type: patch
+        paths:
+          - add_keywords.diff
+          - fix_qt_6.10_warning.diff
     modules:
       - name: libmpv
         cleanup:
@@ -74,7 +78,7 @@ modules:
           - -Dbuild-date=false
           - -Dalsa=disabled
           - -Dmanpage-build=disabled
-          - -Dvulkan=enabled
+          - -Dvulkan=disabled
           - -Dx11=enabled
           - -Dwayland=enabled
           - -Ddrm=enabled
@@ -146,7 +150,7 @@ modules:
             buildsystem: meson
             config-opts:
               - -Dopengl=enabled
-              - -Dvulkan=enabled
+              - -Dvulkan=disabled
               - -Dglslang=disabled
               - -Dd3d11=disabled
               - -Ddemos=false
