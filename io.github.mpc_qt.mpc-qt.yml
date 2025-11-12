@@ -74,7 +74,7 @@ modules:
           - -Dbuild-date=false
           - -Dalsa=disabled
           - -Dmanpage-build=disabled
-          - -Dvulkan=enabled
+          - -Dvulkan=disabled
           - -Dx11=enabled
           - -Dwayland=enabled
           - -Ddrm=enabled
@@ -146,7 +146,7 @@ modules:
             buildsystem: meson
             config-opts:
               - -Dopengl=enabled
-              - -Dvulkan=enabled
+              - -Dvulkan=disabled
               - -Dglslang=disabled
               - -Dd3d11=disabled
               - -Ddemos=false
