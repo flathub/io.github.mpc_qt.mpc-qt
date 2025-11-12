@@ -58,7 +58,9 @@ modules:
         tag: v25.07-flatpak
         commit: 60458ad391ae5aee06bf2fc7d657585d0f43cd81
       - type: patch
-        path: fix_qt_6.10_warning.diff
+        paths:
+          - add_keywords.diff
+          - fix_qt_6.10_warning.diff
     modules:
       - name: libmpv
         cleanup:
