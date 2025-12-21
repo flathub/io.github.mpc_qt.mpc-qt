@@ -105,39 +105,6 @@ modules:
             cleanup:
               - /bin
 
-          - name: vapoursynth
-            config-opts:
-              - --with-python-prefix=/app
-
-            sources:
-              - type: archive
-                url: https://github.com/vapoursynth/vapoursynth/archive/72.tar.gz
-                sha256: f8fcc5e2e9d2195454310e3356ea13e5334125891e452cc6543e985f28cacd22
-                x-checker-data:
-                  type: anitya
-                  project-id: 15982
-                  stable-only: true
-                  url-template: https://github.com/vapoursynth/vapoursynth/archive/$version.tar.gz
-            modules:
-              - name: zimg
-                config-opts:
-                  - --disable-static
-                cleanup:
-                  - /include
-                  - /lib/pkgconfig
-                  - /share/doc
-                sources:
-                  - type: archive
-                    archive-type: tar
-                    url: https://api.github.com/repos/sekrit-twc/zimg/tarball/release-3.0.6
-                    sha256: 15140e491c4ce9db5f02a038d8a1eb53e9151b55eeed06a2899425a6ebfef367
-                    x-checker-data:
-                      type: json
-                      url: https://api.github.com/repos/sekrit-twc/zimg/releases/latest
-                      url-query: .tarball_url
-                      version-query: .tag_name | sub("^release-"; "")
-                      timestamp-query: .published_at
-
           - name: libplacebo
             buildsystem: meson
             config-opts:
