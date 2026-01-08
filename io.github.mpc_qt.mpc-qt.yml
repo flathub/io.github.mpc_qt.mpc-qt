@@ -44,17 +44,12 @@ modules:
   - name: mpc-qt
     buildsystem: cmake-ninja
     config-opts:
-      - -DMPCQT_VERSION=25.07-flatpak
+      - -DMPCQT_VERSION=26.01-flatpak
     sources:
       - type: git
         url: https://github.com/mpc-qt/mpc-qt.git
-        tag: v25.07-flatpak
-        commit: 60458ad391ae5aee06bf2fc7d657585d0f43cd81
-      - type: patch
-        paths:
-          - add_keywords.diff
-          - fix_qt_6.10_warning.diff
-          - add-quickjs-support.diff
+        tag: v26.01
+        commit: e883ab0668b7358bff3c8a5bf92bd5ce685b9ae7
     modules:
       - name: libmpv
         cleanup:
