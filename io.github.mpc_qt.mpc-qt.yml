@@ -81,6 +81,8 @@ modules:
               stable-only: true
               is-important: true
               url-template: https://github.com/mpv-player/mpv/archive/refs/tags/v$version.tar.gz
+          - type: patch
+            path: mpv_0.41-fix-screenshot-with-vaapi.patch
         modules:
           - name: luajit
             no-autogen: true
