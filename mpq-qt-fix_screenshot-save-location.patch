@@ -1,0 +1,34 @@
+From 65bff967dd8ab386d2822ffe108668c8d8ac919c Mon Sep 17 00:00:00 2001
+Message-ID: <65bff967dd8ab386d2822ffe108668c8d8ac919c.1768989656.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Sun, 11 Jan 2026 18:16:15 +0100
+Subject: [PATCH] main: Save only the path part of screenshot location
+
+If we save both the screenshot path and name, the next screenshot gets
+saved in a new folder named as the previous screenshot filename.
+
+I seem to remember that when I tested the original commit, using only
+the path part didn't work, but maybe it was just a temporary Qt bug.
+
+Fixes: 8a127d10a1560cb368e0476bb7b0d5dfd27fca6d ("Remember screenshot
+directory for session")
+---
+ src/main.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/main.cpp b/src/main.cpp
+index 188c7f0..96b33b8 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -1437,7 +1437,7 @@ void Flow::mainwindow_takeImage(Helpers::ScreenshotRender render)
+     // Only remember the screenshot dir if the user picked a different one from the default
+     if (!lastScreenshotDir.isEmpty() ||
+             QFileInfo(QUrl::fromLocalFile(picFile).toLocalFile()).path() != lastScreenshotDir)
+-        lastScreenshotDir = picFile;
++        lastScreenshotDir = QFileInfo(QUrl::fromLocalFile(picFile).toLocalFile()).path();
+ 
+     // Copy the temp file to the desired location, then delete it
+     QFile tf(tempFile);
+-- 
+2.52.0
+
