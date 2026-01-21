@@ -53,6 +53,7 @@ modules:
       - type: patch
         paths:
           - mpq-qt-fix_screenshot-save-location.patch
+          - mpq-qt-fix-lock-file-stale-time.patch
     modules:
       - name: libmpv
         cleanup:

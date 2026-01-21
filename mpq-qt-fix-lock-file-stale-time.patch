@@ -1,0 +1,33 @@
+From fce9367a436cc13300ae6696269b839958319ef9 Mon Sep 17 00:00:00 2001
+Message-ID: <fce9367a436cc13300ae6696269b839958319ef9.1768989334.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Tue, 20 Jan 2026 20:30:02 +0100
+Subject: [PATCH] main: Set a shorter stale time for the lock file
+
+This is especially important for the Flatpak version which always uses
+the same PID. So in case of an unclean shutdown, the stale time is used
+to check if the lock file is still valid.
+It was incorrectly set to never be stale. So let's set it to 10000
+milliseconds.
+
+Fixes #771.
+---
+ src/main.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/main.cpp b/src/main.cpp
+index 188c7f0..9049c43 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -284,7 +284,7 @@ void Flow::detectMode() {
+         QString lockFilePath =
+             Storage::fetchConfigPath() + QLatin1Char('/') + QLatin1String("mpc-qt.lock");
+         std::unique_ptr<QLockFile> lockFile = std::make_unique<QLockFile>(lockFilePath);
+-        lockFile->setStaleLockTime(0);
++        lockFile->setStaleLockTime(10000);
+         while (!lockFile->tryLock()) {
+             alreadyAServer = JsonServer::sendPayload(makePayload(), MpcQtServer::defaultSocketName());
+             programMode = alreadyAServer ? EarlyQuitMode : PrimaryMode;
+-- 
+2.52.0
+
