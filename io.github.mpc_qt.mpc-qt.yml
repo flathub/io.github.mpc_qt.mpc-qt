@@ -50,6 +50,9 @@ modules:
         url: https://github.com/mpc-qt/mpc-qt.git
         tag: v26.01
         commit: e883ab0668b7358bff3c8a5bf92bd5ce685b9ae7
+      - type: patch
+        paths:
+          - mpq-qt-fix_screenshot-save-location.patch
     modules:
       - name: libmpv
         cleanup:
