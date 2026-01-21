@@ -1,0 +1,28 @@
+From e8069156e9756fc6fd39c0b8388d0d9a90d00b1b Mon Sep 17 00:00:00 2001
+Message-ID: <e8069156e9756fc6fd39c0b8388d0d9a90d00b1b.1768153616.git.3265870+tbertels@users.noreply.github.com>
+From: llyyr <llyyr.public@gmail.com>
+Date: Sat, 27 Dec 2025 02:19:15 +0530
+Subject: [PATCH] screenshot: correctly detect hardware frame
+
+This only ever worked by accident and relied on broken behavior that was
+fixed by 9b1d47ece11da8625591bb5817bbad622485074b
+---
+ player/screenshot.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/player/screenshot.c b/player/screenshot.c
+index c733a2bdb1..32d10a047d 100644
+--- a/player/screenshot.c
++++ b/player/screenshot.c
+@@ -377,7 +377,7 @@ static struct mp_image *screenshot_get(struct MPContext *mpctx, int mode,
+     }
+ 
+     // vo_get_current_frame() can return a hardware frame, which we have to download first.
+-    if (image && image->fmt.flags & MP_IMGFLAG_HWACCEL) {
++    if (image && IMGFMT_IS_HWACCEL(image->imgfmt)) {
+         struct mp_image *nimage = mp_image_hw_download(image, NULL);
+         talloc_free(image);
+         if (!nimage)
+-- 
+2.52.0
+
