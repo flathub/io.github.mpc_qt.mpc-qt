@@ -1,0 +1,226 @@
+From 74304970efb6556defdb43ab71f3b6e719d7d07e Mon Sep 17 00:00:00 2001
+Message-ID: <74304970efb6556defdb43ab71f3b6e719d7d07e.1769532604.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Mon, 26 Jan 2026 22:11:09 +0100
+Subject: [PATCH] mainwindow: Change key shortcut for "Move File to Recycle
+ Bin"
+
+Users most likely don't expect a media player to remove files, so it's
+safer to use a key combination to avoid any unwanted triggering.
+
+And add an Alt key shortcut.
+---
+ src/main.cpp                 |  4 +++-
+ src/mainwindow.cpp           |  5 +++++
+ src/mainwindow.h             |  1 +
+ src/mainwindow.ui            |  4 ++--
+ translations/mpc-qt_de.ts    | 10 +++++++++-
+ translations/mpc-qt_fr.ts    | 10 +++++++++-
+ translations/mpc-qt_ja.ts    | 10 +++++++++-
+ translations/mpc-qt_zh_CN.ts | 10 +++++++++-
+ 8 files changed, 47 insertions(+), 7 deletions(-)
+
+diff --git a/src/main.cpp b/src/main.cpp
+index 188c7f0..a58836c 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -1224,8 +1224,10 @@ bool Flow::isNvidiaGPU()
+ void Flow::showVersionInfo()
+ {
+     QString package = "Native build";
+-    if (qEnvironmentVariableIsSet("FLATPAK_ID"))
++    if (qEnvironmentVariableIsSet("FLATPAK_ID")) {
+         package = "Flatpak";
++        mainWindow->setRemoveFileNotRecycle();
++    }
+     else if (qEnvironmentVariableIsSet("APPIMAGE"))
+         package = "AppImage";
+     else if (qEnvironmentVariableIsSet("SNAP"))
+diff --git a/src/mainwindow.cpp b/src/mainwindow.cpp
+index 250283e..f277120 100644
+--- a/src/mainwindow.cpp
++++ b/src/mainwindow.cpp
+@@ -344,6 +344,11 @@ void MainWindow::setActionPlayLoopUse()
+     ui->actionPlayLoopUse->setChecked(true);
+ }
+ 
++void MainWindow::setRemoveFileNotRecycle()
++{
++    ui->actionFileMoveToRecycleBin->setText(tr("Re&move File"));
++}
++
+ void MainWindow::resizePlaylistToFit()
+ {
+     if (ui->actionViewMusicMode->isChecked() && !playlistWindow_->isFloating()) {
+diff --git a/src/mainwindow.h b/src/mainwindow.h
+index 0d82ab7..870bc95 100644
+--- a/src/mainwindow.h
++++ b/src/mainwindow.h
+@@ -49,6 +49,7 @@ public:
+     void unfreezeWindow();
+     void fixMpvwSize();
+     void setActionPlayLoopUse();
++    void setRemoveFileNotRecycle();
+ 
+ protected:
+     void resizeEvent(QResizeEvent *event);
+diff --git a/src/mainwindow.ui b/src/mainwindow.ui
+index 5a0aa72..31a9761 100644
+--- a/src/mainwindow.ui
++++ b/src/mainwindow.ui
+@@ -1164,10 +1164,10 @@
+   </action>
+   <action name="actionFileMoveToRecycleBin">
+     <property name="text">
+-      <string>Move File to Recycle Bin</string>
++      <string>&amp;Move File to Recycle Bin</string>
+     </property>
+     <property name="shortcut">
+-      <string notr="true">Del</string>
++      <string notr="true">Shift+Del</string>
+     </property>
+   </action>
+   <action name="actionFileSaveCopy">
+diff --git a/translations/mpc-qt_de.ts b/translations/mpc-qt_de.ts
+index 1371e73..0297e0c 100644
+--- a/translations/mpc-qt_de.ts
++++ b/translations/mpc-qt_de.ts
+@@ -1320,6 +1320,10 @@
+         <source>Every time</source>
+         <translation type="vanished">Every time</translation>
+     </message>
++    <message>
++        <source>Re&amp;move File</source>
++        <translation type="unfinished"></translation>
++    </message>
+     <message>
+         <source>View</source>
+         <translation>Ansicht</translation>
+@@ -1686,7 +1690,7 @@
+     </message>
+     <message>
+         <source>Move File to Recycle Bin</source>
+-        <translation>Datei in Papierkorb verschieben</translation>
++        <translation type="vanished">Datei in Papierkorb verschieben</translation>
+     </message>
+     <message>
+         <source>Screenshot</source>
+@@ -1784,6 +1788,10 @@
+         <source>&amp;Play</source>
+         <translation type="vanished">&amp;Abspielen</translation>
+     </message>
++    <message>
++        <source>&amp;Move File to Recycle Bin</source>
++        <translation type="unfinished"></translation>
++    </message>
+ </context>
+ <context>
+     <name>MouseState</name>
+diff --git a/translations/mpc-qt_fr.ts b/translations/mpc-qt_fr.ts
+index fc0c18f..c0015e3 100644
+--- a/translations/mpc-qt_fr.ts
++++ b/translations/mpc-qt_fr.ts
+@@ -1272,6 +1272,10 @@
+         <source>Lo&amp;g</source>
+         <translation>Journa&amp;l</translation>
+     </message>
++    <message>
++        <source>Re&amp;move File</source>
++        <translation>S&amp;upprimer le fichier</translation>
++    </message>
+     <message>
+         <source>View</source>
+         <translation>Affichage</translation>
+@@ -1610,7 +1614,7 @@
+     </message>
+     <message>
+         <source>Move File to Recycle Bin</source>
+-        <translation>Déplacer le fichier dans la corbeille</translation>
++        <translation type="vanished">Déplacer le fichier dans la corbeille</translation>
+     </message>
+     <message>
+         <source>Screenshot</source>
+@@ -1724,6 +1728,10 @@
+         <source>&amp;Play</source>
+         <translation type="vanished">&amp;Play</translation>
+     </message>
++    <message>
++        <source>&amp;Move File to Recycle Bin</source>
++        <translation>Dé&amp;placer dans la corbeille</translation>
++    </message>
+ </context>
+ <context>
+     <name>MouseState</name>
+diff --git a/translations/mpc-qt_ja.ts b/translations/mpc-qt_ja.ts
+index fc6197b..d523eb1 100644
+--- a/translations/mpc-qt_ja.ts
++++ b/translations/mpc-qt_ja.ts
+@@ -1320,6 +1320,10 @@
+         <source>Every time</source>
+         <translation type="vanished">毎回</translation>
+     </message>
++    <message>
++        <source>Re&amp;move File</source>
++        <translation>ファイルを削除(&amp;M)</translation>
++    </message>
+     <message>
+         <source>View</source>
+         <translation>表示</translation>
+@@ -1686,7 +1690,7 @@
+     </message>
+     <message>
+         <source>Move File to Recycle Bin</source>
+-        <translation>ファイルをごみ箱に移動する</translation>
++        <translation type="vanished">ファイルをごみ箱に移動する</translation>
+     </message>
+     <message>
+         <source>Screenshot</source>
+@@ -1788,6 +1792,10 @@
+         <source>&amp;Play</source>
+         <translation type="vanished">再生(&amp;P)</translation>
+     </message>
++    <message>
++        <source>&amp;Move File to Recycle Bin</source>
++        <translation>ファイルをごみ箱へ移動(&amp;M)</translation>
++    </message>
+ </context>
+ <context>
+     <name>MouseState</name>
+diff --git a/translations/mpc-qt_zh_CN.ts b/translations/mpc-qt_zh_CN.ts
+index 418bd72..5f730aa 100644
+--- a/translations/mpc-qt_zh_CN.ts
++++ b/translations/mpc-qt_zh_CN.ts
+@@ -1320,6 +1320,10 @@
+         <source>Every time</source>
+         <translation type="vanished">每次播放</translation>
+     </message>
++    <message>
++        <source>Re&amp;move File</source>
++        <translation>移除文件(&amp;M)</translation>
++    </message>
+     <message>
+         <source>View</source>
+         <translation>视图</translation>
+@@ -1642,7 +1646,7 @@
+     </message>
+     <message>
+         <source>Move File to Recycle Bin</source>
+-        <translation>移动文件到回收站</translation>
++        <translation type="vanished">移动文件到回收站</translation>
+     </message>
+     <message>
+         <source>Screenshot</source>
+@@ -1744,6 +1748,10 @@
+         <source>&amp;Play</source>
+         <translation type="vanished">播放(&amp;P)</translation>
+     </message>
++    <message>
++        <source>&amp;Move File to Recycle Bin</source>
++        <translation>将文件移至回收站(&amp;M)</translation>
++    </message>
+ </context>
+ <context>
+     <name>MouseState</name>
+-- 
+2.52.0
+
