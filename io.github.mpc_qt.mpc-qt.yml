@@ -54,6 +54,8 @@ modules:
         paths:
           - mpq-qt-fix_screenshot-save-location.patch
           - mpq-qt-fix-lock-file-stale-time.patch
+          - mpq-qt-wayland-mode-by-default.patch
+          - mpq-qt-key-shortcut-remove-recycle.patch
     modules:
       - name: libmpv
         cleanup:
