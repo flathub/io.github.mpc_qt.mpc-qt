@@ -192,8 +192,8 @@ modules:
               - name: hwdata
                 sources:
                   - type: archive
-                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.404.tar.gz
-                    sha256: 5c14fc99bf193faad1ccc267ccfff14ee4e4550a582b17a76aec72178539f837
+                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.405.tar.gz
+                    sha256: 13605519e72e46aa13d5eede1901a07a6c83cd25ef866a86e7458047b5c81ce5
                     x-checker-data:
                       type: anitya
                       project-id: 5387
@@ -210,8 +210,8 @@ modules:
               - install yt-dlp /app/bin
             sources:
               - type: archive
-                url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2026.02.21.tar.gz
-                sha256: ecbb3d617049f0d44ecbb94a6fdca601dc6abb97ea19e4cba2a8bcd635ceceda
+                url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2026.03.03.tar.gz
+                sha256: e7d718b4f2de8ca31660ae65a49792a572292dde3ddddc0ef5362c8377e2c80c
                 x-checker-data:
                   type: anitya
                   project-id: 143399
