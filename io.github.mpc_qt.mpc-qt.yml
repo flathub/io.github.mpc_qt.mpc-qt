@@ -57,6 +57,7 @@ modules:
           - mpq-qt-fix-lock-file-stale-time.patch
           - mpq-qt-wayland-mode-by-default.patch
           - mpq-qt-key-shortcut-remove-recycle.patch
+          - mpq-qt-fix-hibernate-suspend-poweroff.patch
     modules:
       - name: libmpv
         cleanup:
