@@ -26,8 +26,9 @@ finish-args:
   - --filesystem=xdg-videos
   - --filesystem=xdg-run/gamescope-0:ro
   - --filesystem=xdg-run/pipewire-0:ro
-  - --talk-name=org.freedesktop.ScreenSaver
   - --own-name=org.mpris.MediaPlayer2.MpcQt
+  - --talk-name=org.freedesktop.ScreenSaver
+  - --system-talk-name=org.freedesktop.login1
   - --system-talk-name=org.freedesktop.UDisks2
 # Access to home folder is needed for external subtitles and for downloaded mouse cursor
   - --filesystem=home:ro
@@ -56,6 +57,7 @@ modules:
           - mpq-qt-fix-lock-file-stale-time.patch
           - mpq-qt-wayland-mode-by-default.patch
           - mpq-qt-key-shortcut-remove-recycle.patch
+          - mpq-qt-fix-hibernate-suspend-poweroff.patch
     modules:
       - name: libmpv
         cleanup:

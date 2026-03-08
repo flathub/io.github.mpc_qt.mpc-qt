@@ -1,0 +1,52 @@
+From a808d5c05f7b23428e40b0d62efd2a252eed509c Mon Sep 17 00:00:00 2001
+Message-ID: <a808d5c05f7b23428e40b0d62efd2a252eed509c.1772973783.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Wed, 18 Feb 2026 11:06:09 +0100
+Subject: [PATCH] screensaver: Add missing interactive argument
+
+org.freedesktop.login1.Manager Hibernate, Suspend and PowerOff require
+an interactive argument. It is used to control whether polkit should
+interactively ask the user for authentication credentials if required.
+These methods don't work without it.
+
+Link: https://www.freedesktop.org/software/systemd/man/org.freedesktop.login1.html
+
+#814 ("[Feature request] after playback shutdown")
+---
+ src/platform/screensaver_unix.cpp | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/platform/screensaver_unix.cpp b/src/platform/screensaver_unix.cpp
+index 452ef491..e68c30aa 100644
+--- a/src/platform/screensaver_unix.cpp
++++ b/src/platform/screensaver_unix.cpp
+@@ -99,7 +99,7 @@ void ScreenSaverUnix::hibernateSystem()
+     if (!isInhibiting)
+         return;
+ 
+-    QDBusPendingCall async = dbusLogin.asyncCall("Hibernate");
++    QDBusPendingCall async = dbusLogin.asyncCall("Hibernate", false);
+     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
+ 
+     connect(watcher, &QDBusPendingCallWatcher::finished,
+@@ -111,7 +111,7 @@ void ScreenSaverUnix::suspendSystem()
+     if (!isInhibiting)
+         return;
+ 
+-    QDBusPendingCall async = dbusLogin.asyncCall("Suspend");
++    QDBusPendingCall async = dbusLogin.asyncCall("Suspend", false);
+     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
+ 
+     connect(watcher, &QDBusPendingCallWatcher::finished,
+@@ -123,7 +123,7 @@ void ScreenSaverUnix::shutdownSystem()
+     if (!isInhibiting)
+         return;
+ 
+-    QDBusPendingCall async = dbusLogin.asyncCall("PowerOff");
++    QDBusPendingCall async = dbusLogin.asyncCall("PowerOff", false);
+     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
+ 
+     connect(watcher, &QDBusPendingCallWatcher::finished,
+-- 
+2.53.0
+
