@@ -1,0 +1,128 @@
+From 5fab3e49fb29ee9132724fbdb159594a87caac95 Mon Sep 17 00:00:00 2001
+Message-ID: <5fab3e49fb29ee9132724fbdb159594a87caac95.1774552866.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Thu, 22 Jan 2026 11:21:28 +0100
+Subject: [PATCH] Only enable "Prefer Wayland over XWayland" option on Wayland
+
+---
+ src/main.cpp           | 24 +++++++++++++-----------
+ src/main.h             |  3 ++-
+ src/settingswindow.cpp |  7 ++++---
+ src/settingswindow.h   |  2 +-
+ src/settingswindow.ui  |  3 +++
+ 5 files changed, 23 insertions(+), 16 deletions(-)
+
+diff --git a/src/main.cpp b/src/main.cpp
+index 188c7f03..a56222da 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -131,7 +131,8 @@ void signalHandler(int signal) {
+ 
+ //---------------------------------------------------------------------------
+ 
+-bool Flow::settingsDisableWindowManagement = false;
++bool Flow::isWayland = false;
++bool Flow::isWaylandMode = false;
+ 
+ Flow::Flow(QObject *owner) :
+     QObject(owner)
+@@ -311,8 +312,7 @@ void Flow::init() {
+     Logger::log(logModule, "creating settings window");
+     settingsWindow = new SettingsWindow();
+     settingsWindow->setWindowModality(Qt::WindowModal);
+-    if (settingsDisableWindowManagement)
+-        settingsWindow->disableWindowManagment();
++    settingsWindow->setWaylandOptions(isWayland, isWaylandMode);
+     Logger::log(logModule, "creating properties window");
+     propertiesWindow = new PropertiesWindow();
+     Logger::log(logModule, "creating favorites window");
+@@ -433,15 +433,17 @@ void Flow::earlyPlatformOverride()
+ 
+     // Wayland doesn't support run-time centering and it doesn't look like
+     // it'll support it any time soon.  I'll remove this code when it does.
+-    bool nvidiaDetected = Flow::isNvidiaGPU();
+-    Storage s;
+-    QVariantMap settings = s.readVMap(fileSettings);
+-    if (!settings.value("tweaksPreferWayland", QVariant(false)).toBool())
+-        qputenv("QT_QPA_PLATFORM", "xcb");
+-    else if (!qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY"))
+-        settingsDisableWindowManagement = true;
++    if (qEnvironmentVariable("XDG_SESSION_TYPE") == "wayland") {
++        isWayland = true;
++        Storage s;
++        QVariantMap settings = s.readVMap(fileSettings);
++        if (!settings.value("tweaksPreferWayland", QVariant(false)).toBool())
++            qputenv("QT_QPA_PLATFORM", "xcb");
++        else if (!qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY"))
++            isWaylandMode = true;
++    }
+     // The Nvidia drivers don't work well with EGL
+-    if (!nvidiaDetected)
++    if (!Flow::isNvidiaGPU())
+         qputenv("QT_XCB_GL_INTEGRATION", "xcb_egl");
+ }
+ 
+diff --git a/src/main.h b/src/main.h
+index 35f64496..518b52b2 100644
+--- a/src/main.h
++++ b/src/main.h
+@@ -146,7 +146,8 @@ private:
+     bool validCliPos = false;
+     QStringList customFiles;
+ 
+-    static bool settingsDisableWindowManagement;
++    static bool isWayland;
++    static bool isWaylandMode;
+     bool firstFile = true;
+     bool playlistsBackupLoaded = false;
+     bool inhibitScreensaver = false;
+diff --git a/src/settingswindow.cpp b/src/settingswindow.cpp
+index bbbf57ef..b081117f 100644
+--- a/src/settingswindow.cpp
++++ b/src/settingswindow.cpp
+@@ -373,11 +373,12 @@ QVariantMap SettingsWindow::settings()
+     return acceptedSettings.toVMap();
+ }
+ 
+-void SettingsWindow::disableWindowManagment()
++void SettingsWindow::setWaylandOptions(bool isWayland, bool isWaylandMode)
+ {
+     // Wayland breaks applications
+-    ui->playerLimitProportions->setDisabled(true);
+-    ui->playbackAutoCenterWindow->setDisabled(true);
++    ui->playerLimitProportions->setDisabled(isWaylandMode);
++    ui->playbackAutoCenterWindow->setDisabled(isWaylandMode);
++    ui->tweaksPreferWayland->setEnabled(isWayland);
+ }
+ 
+ void SettingsWindow::setupPageTree()
+diff --git a/src/settingswindow.h b/src/settingswindow.h
+index ef7d7ea4..35cdacf0 100644
+--- a/src/settingswindow.h
++++ b/src/settingswindow.h
+@@ -61,7 +61,7 @@ public:
+     ~SettingsWindow();
+     QVariantMap settings();
+     QVariantMap keyMap();
+-    void disableWindowManagment();
++    void setWaylandOptions(bool isWayland, bool isWaylandMode);
+ 
+ private:
+     void setupPageTree();
+diff --git a/src/settingswindow.ui b/src/settingswindow.ui
+index 6a60060c..20f889ca 100644
+--- a/src/settingswindow.ui
++++ b/src/settingswindow.ui
+@@ -7801,6 +7801,9 @@ media file played</string>
+            </item>
+            <item row="6" column="0" colspan="2">
+             <widget class="QCheckBox" name="tweaksPreferWayland">
++             <property name="enabled">
++              <bool>false</bool>
++             </property>
+              <property name="text">
+               <string>Prefer Wayland over XWayland (restart required)</string>
+              </property>
+-- 
+2.53.0
+

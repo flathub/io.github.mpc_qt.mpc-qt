@@ -58,6 +58,9 @@ modules:
           - mpq-qt-wayland-mode-by-default.patch
           - mpq-qt-key-shortcut-remove-recycle.patch
           - mpq-qt-fix-hibernate-suspend-poweroff.patch
+          - mpc-qt-wayland-option-on-wayland.patch
+          - mpc-qt-differentiate-between-x11-and-xwayland.patch
+          - mpc-qt-wayland-mode-on-first-start.patch
     modules:
       - name: libmpv
         cleanup:
