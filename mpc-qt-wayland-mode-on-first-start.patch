@@ -1,0 +1,32 @@
+From dba0ad3c1b4da920cfd5303e749e1b3f855a12a7 Mon Sep 17 00:00:00 2001
+Message-ID: <dba0ad3c1b4da920cfd5303e749e1b3f855a12a7.1774552866.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Wed, 25 Mar 2026 15:13:21 +0100
+Subject: [PATCH] main: Default to Wayland mode on first start
+
+Since 4cfd05c5978577d037c8a468f6f2a8b35a4873e8 we run in Wayland mode by
+default, except on the first start because the config value doesn't
+exist yet.
+
+Fixes: 4cfd05c5978577d037c8a468f6f2a8b35a4873e8 ("settingswindow: Use
+Wayland mode by default on Wayland")
+---
+ src/main.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/main.cpp b/src/main.cpp
+index a56222da..1ba6a46c 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -437,7 +437,7 @@ void Flow::earlyPlatformOverride()
+         isWayland = true;
+         Storage s;
+         QVariantMap settings = s.readVMap(fileSettings);
+-        if (!settings.value("tweaksPreferWayland", QVariant(false)).toBool())
++        if (!settings.value("tweaksPreferWayland", QVariant(true)).toBool())
+             qputenv("QT_QPA_PLATFORM", "xcb");
+         else if (!qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY"))
+             isWaylandMode = true;
+-- 
+2.53.0
+

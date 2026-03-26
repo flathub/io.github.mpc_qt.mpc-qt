@@ -1,0 +1,304 @@
+From 832e6f152a504377ac288435d1d1b111e9d71d6b Mon Sep 17 00:00:00 2001
+Message-ID: <832e6f152a504377ac288435d1d1b111e9d71d6b.1774552866.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Thu, 22 Jan 2026 13:12:56 +0100
+Subject: [PATCH] mainwindow: Differentiate between X11 and XWayland in About
+
+Also lets it detect Wayland with Qt < 6.5 (like the current AppImage).
+---
+ src/mainwindow.cpp           | 16 ++++++++--------
+ translations/mpc-qt_ar.ts    |  4 ----
+ translations/mpc-qt_ca.ts    |  4 ----
+ translations/mpc-qt_de.ts    |  2 +-
+ translations/mpc-qt_en.ts    |  2 +-
+ translations/mpc-qt_es.ts    |  4 ----
+ translations/mpc-qt_fi.ts    |  4 ----
+ translations/mpc-qt_fr.ts    |  2 +-
+ translations/mpc-qt_id.ts    |  4 ----
+ translations/mpc-qt_it.ts    |  4 ----
+ translations/mpc-qt_ja.ts    |  2 +-
+ translations/mpc-qt_nb_NO.ts |  4 ----
+ translations/mpc-qt_nl.ts    |  4 ----
+ translations/mpc-qt_pt_BR.ts |  4 ----
+ translations/mpc-qt_ru.ts    |  4 ----
+ translations/mpc-qt_ta.ts    |  4 ----
+ translations/mpc-qt_tr.ts    |  4 ----
+ translations/mpc-qt_zh_CN.ts |  2 +-
+ 18 files changed, 13 insertions(+), 61 deletions(-)
+
+diff --git a/src/mainwindow.cpp b/src/mainwindow.cpp
+index 250283e3..8fc7e036 100644
+--- a/src/mainwindow.cpp
++++ b/src/mainwindow.cpp
+@@ -3379,15 +3379,15 @@ void MainWindow::on_actionHelpAbout_triggered()
+     dateLine = "<br>" + dateLineFmt.arg(QLocale().toString(buildDate, dateFormat),
+                                         QLocale().toString(buildTime, timeFormat));
+ #endif
+-QString displayMode = tr("(Unknown)");
+-#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
+-    if (qApp->nativeInterface<QNativeInterface::QX11Application>())
+-        displayMode = tr("XWayland or X11");
+-#if QT_VERSION >= QT_VERSION_CHECK(6,5,0)
+-    else if (qApp->nativeInterface<QNativeInterface::QWaylandApplication>())
++    QString displayMode = tr("(Unknown)");
++    if (QGuiApplication::platformName() == "wayland")
+         displayMode = "Wayland";
+-#endif // is qt >= 6.5
+-#endif // is Linux
++    else {
++        if (qEnvironmentVariable("XDG_SESSION_TYPE") == "wayland")
++            displayMode = "XWayland";
++        else
++            displayMode = "X11";
++    }
+     QMessageBox::about(this, tr("About Media Player Classic Qute Theater"),
+       "<h2>" + tr("Media Player Classic Qute Theater") + "</h2>" +
+       "<p>" +  tr("A clone of Media Player Classic written in Qt") +
+diff --git a/translations/mpc-qt_ar.ts b/translations/mpc-qt_ar.ts
+index 81ce8184..55daccb4 100644
+--- a/translations/mpc-qt_ar.ts
++++ b/translations/mpc-qt_ar.ts
+@@ -1476,10 +1476,6 @@
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_ca.ts b/translations/mpc-qt_ca.ts
+index 4e81488b..ecd4f8a5 100644
+--- a/translations/mpc-qt_ca.ts
++++ b/translations/mpc-qt_ca.ts
+@@ -1632,10 +1632,6 @@
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_de.ts b/translations/mpc-qt_de.ts
+index 1371e732..d8cd930b 100644
+--- a/translations/mpc-qt_de.ts
++++ b/translations/mpc-qt_de.ts
+@@ -1654,7 +1654,7 @@
+     </message>
+     <message>
+         <source>XWayland or X11</source>
+-        <translation>XWayland oder X11</translation>
++        <translation type="vanished">XWayland oder X11</translation>
+     </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+diff --git a/translations/mpc-qt_en.ts b/translations/mpc-qt_en.ts
+index 7f522bc0..1b6b7338 100644
+--- a/translations/mpc-qt_en.ts
++++ b/translations/mpc-qt_en.ts
+@@ -1642,7 +1642,7 @@
+     </message>
+     <message>
+         <source>XWayland or X11</source>
+-        <translation>XWayland or X11</translation>
++        <translation type="vanished">XWayland or X11</translation>
+     </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+diff --git a/translations/mpc-qt_es.ts b/translations/mpc-qt_es.ts
+index 4583220d..006e5aad 100644
+--- a/translations/mpc-qt_es.ts
++++ b/translations/mpc-qt_es.ts
+@@ -1532,10 +1532,6 @@
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_fi.ts b/translations/mpc-qt_fi.ts
+index 6d076aa5..9e904267 100644
+--- a/translations/mpc-qt_fi.ts
++++ b/translations/mpc-qt_fi.ts
+@@ -1496,10 +1496,6 @@
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_fr.ts b/translations/mpc-qt_fr.ts
+index fc0c18fa..76c4321c 100644
+--- a/translations/mpc-qt_fr.ts
++++ b/translations/mpc-qt_fr.ts
+@@ -1578,7 +1578,7 @@
+     </message>
+     <message>
+         <source>XWayland or X11</source>
+-        <translation>XWayland ou X11</translation>
++        <translation type="vanished">XWayland ou X11</translation>
+     </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+diff --git a/translations/mpc-qt_id.ts b/translations/mpc-qt_id.ts
+index 516234e6..2bd710f3 100644
+--- a/translations/mpc-qt_id.ts
++++ b/translations/mpc-qt_id.ts
+@@ -1588,10 +1588,6 @@
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_it.ts b/translations/mpc-qt_it.ts
+index d1218105..6e378a30 100644
+--- a/translations/mpc-qt_it.ts
++++ b/translations/mpc-qt_it.ts
+@@ -1532,10 +1532,6 @@
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_ja.ts b/translations/mpc-qt_ja.ts
+index fc6197b7..c97f153b 100644
+--- a/translations/mpc-qt_ja.ts
++++ b/translations/mpc-qt_ja.ts
+@@ -1654,7 +1654,7 @@
+     </message>
+     <message>
+         <source>XWayland or X11</source>
+-        <translation>XWayland または X11</translation>
++        <translation type="vanished">XWayland または X11</translation>
+     </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+diff --git a/translations/mpc-qt_nb_NO.ts b/translations/mpc-qt_nb_NO.ts
+index 57fa9119..20fa1923 100644
+--- a/translations/mpc-qt_nb_NO.ts
++++ b/translations/mpc-qt_nb_NO.ts
+@@ -1564,10 +1564,6 @@
+         <source>(Unknown)</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_nl.ts b/translations/mpc-qt_nl.ts
+index 58feaf21..2bb99069 100644
+--- a/translations/mpc-qt_nl.ts
++++ b/translations/mpc-qt_nl.ts
+@@ -1476,10 +1476,6 @@
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_pt_BR.ts b/translations/mpc-qt_pt_BR.ts
+index 997be3b1..907672d8 100644
+--- a/translations/mpc-qt_pt_BR.ts
++++ b/translations/mpc-qt_pt_BR.ts
+@@ -1496,10 +1496,6 @@
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_ru.ts b/translations/mpc-qt_ru.ts
+index 49079270..68e9f1f1 100644
+--- a/translations/mpc-qt_ru.ts
++++ b/translations/mpc-qt_ru.ts
+@@ -1612,10 +1612,6 @@
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_ta.ts b/translations/mpc-qt_ta.ts
+index 21500be6..f602d102 100644
+--- a/translations/mpc-qt_ta.ts
++++ b/translations/mpc-qt_ta.ts
+@@ -1632,10 +1632,6 @@
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_tr.ts b/translations/mpc-qt_tr.ts
+index fc2b7025..991ab236 100644
+--- a/translations/mpc-qt_tr.ts
++++ b/translations/mpc-qt_tr.ts
+@@ -1632,10 +1632,6 @@
+         <source>Running under %1</source>
+         <translation type="unfinished"></translation>
+     </message>
+-    <message>
+-        <source>XWayland or X11</source>
+-        <translation type="unfinished"></translation>
+-    </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+         <translation type="unfinished"></translation>
+diff --git a/translations/mpc-qt_zh_CN.ts b/translations/mpc-qt_zh_CN.ts
+index 418bd72b..53254ab3 100644
+--- a/translations/mpc-qt_zh_CN.ts
++++ b/translations/mpc-qt_zh_CN.ts
+@@ -1610,7 +1610,7 @@
+     </message>
+     <message>
+         <source>XWayland or X11</source>
+-        <translation>XWayland 或 X11</translation>
++        <translation type="vanished">XWayland 或 X11</translation>
+     </message>
+     <message>
+         <source>&amp;Input Cache Statistics</source>
+-- 
+2.53.0
+
