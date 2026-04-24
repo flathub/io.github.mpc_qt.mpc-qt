@@ -61,6 +61,7 @@ modules:
           - mpc-qt-wayland-option-on-wayland.patch
           - mpc-qt-differentiate-between-x11-and-xwayland.patch
           - mpc-qt-wayland-mode-on-first-start.patch
+          - mpq-qt-desktop-categories.patch
     modules:
       - name: libmpv
         cleanup:
