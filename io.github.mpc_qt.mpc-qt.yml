@@ -106,8 +106,8 @@ modules:
             sources:
               - type: git
                 url: https://github.com/openresty/luajit2.git
-                tag: v2.1-20260311
-                commit: 3640b6c590f9c383ffa5d0955f35e646f684a1da
+                tag: v2.1-20260606
+                commit: a08100e7598451d4fd3a89a9826980f7c64117e7
                 x-checker-data:
                   type: git
                   tag-pattern: ^v([\d.-]+)$
@@ -196,8 +196,8 @@ modules:
               - name: hwdata
                 sources:
                   - type: archive
-                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.405.tar.gz
-                    sha256: 13605519e72e46aa13d5eede1901a07a6c83cd25ef866a86e7458047b5c81ce5
+                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.408.tar.gz
+                    sha256: ac7c34efc5941d5cbf739a8f7f6c84b1c2edea493fd3fca10906ef64d7afd690
                     x-checker-data:
                       type: anitya
                       project-id: 5387
@@ -232,8 +232,8 @@ modules:
           - /bin/qjsc
         sources:
           - type: archive
-            url: https://bellard.org/quickjs/quickjs-2025-09-13-2.tar.xz
-            sha256: 996c6b5018fc955ad4d06426d0e9cb713685a00c825aa5c0418bd53f7df8b0b4
+            url: https://bellard.org/quickjs/quickjs-2026-06-04.tar.xz
+            sha256: b376e839b322978313d929fd20663b11ba58b75df5a46c126dd19ea2fa70ad2a
             x-checker-data:
               type: anitya
               project-id: 138263
@@ -248,8 +248,8 @@ modules:
           - ./b2 install variant=release link=shared runtime-link=shared --prefix=/app
         sources:
           - type: archive
-            url: https://github.com/boostorg/boost/releases/download/boost-1.90.0/boost-1.90.0-cmake.tar.gz
-            sha256: 913ca43d49e93d1b158c9862009add1518a4c665e7853b349a6492d158b036d4
+            url: https://github.com/boostorg/boost/releases/download/boost-1.91.0-1/boost-1.91.0-1-cmake.tar.gz
+            sha256: 8a82bd11a720c70923806c36ee5c26dbd2d630c1eaa1d8fad9a7bd5529908a26
             x-checker-data:
               type: anitya
               project-id: 6845
