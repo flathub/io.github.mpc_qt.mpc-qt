@@ -45,23 +45,12 @@ modules:
   - name: mpc-qt
     buildsystem: cmake-ninja
     config-opts:
-      - -DMPCQT_VERSION=26.01-flatpak
+      - -DMPCQT_VERSION=26.07
     sources:
       - type: git
         url: https://github.com/mpc-qt/mpc-qt.git
-        tag: v26.01
-        commit: e883ab0668b7358bff3c8a5bf92bd5ce685b9ae7
-      - type: patch
-        paths:
-          - mpq-qt-fix_screenshot-save-location.patch
-          - mpq-qt-fix-lock-file-stale-time.patch
-          - mpq-qt-wayland-mode-by-default.patch
-          - mpq-qt-key-shortcut-remove-recycle.patch
-          - mpq-qt-fix-hibernate-suspend-poweroff.patch
-          - mpc-qt-wayland-option-on-wayland.patch
-          - mpc-qt-differentiate-between-x11-and-xwayland.patch
-          - mpc-qt-wayland-mode-on-first-start.patch
-          - mpq-qt-desktop-categories.patch
+        tag: v26.07
+        commit: 6e3e9f06a6c58d1abecd4b33c152bb92115ac1ac
     modules:
       - name: libmpv
         cleanup:
