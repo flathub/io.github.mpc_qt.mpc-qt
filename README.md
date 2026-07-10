@@ -1,4 +1,4 @@
-## Media Player Classic Qute Theater
+## Media Player Classic Qute Theater ([homepage] - [source repository])
 
 A clone of Media Player Classic reimplemented in Qt.
 
@@ -28,5 +28,7 @@ From a command line:
 
 `flatpak run io.github.mpc_qt.mpc-qt`
 
+[homepage]:https://mpc-qt.github.io/
+[source repository]:https://github.com/mpc-qt/mpc-qt
 [this guide]:https://flatpak.org/setup/
 [its Flathub page]:https://flathub.org/apps/io.github.mpc_qt.mpc-qt
