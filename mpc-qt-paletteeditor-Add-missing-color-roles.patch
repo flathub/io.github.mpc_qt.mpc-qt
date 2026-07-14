@@ -1,0 +1,47 @@
+From 351428c821ab908124ebe734bfebadff0b10f00f Mon Sep 17 00:00:00 2001
+Message-ID: <351428c821ab908124ebe734bfebadff0b10f00f.1784032397.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Fri, 10 Jul 2026 23:31:29 +0200
+Subject: [PATCH] paletteeditor: Add missing color roles
+
+Add a dark palette for PlaceholderText.
+
+Fixes: 83267497fb25ff8e8e7f95515050305f06c8ffe6 ("Add "Use dark colors"
+option")
+
+Fixes: 93019590d473e0be87fbdbdfe4959e16b07f99d6 ("settingswindow: Use
+dark colors if a dark colors system theme is detected") which depends on
+the above.
+
+Fixes #1007 (""Search settings..." is not following dark mode color?").
+---
+ src/widgets/paletteeditor.cpp | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/widgets/paletteeditor.cpp b/src/widgets/paletteeditor.cpp
+index 21e6a7b3..1ffc8268 100644
+--- a/src/widgets/paletteeditor.cpp
++++ b/src/widgets/paletteeditor.cpp
+@@ -181,7 +181,8 @@ QPalette PaletteEditor::darkPalette()
+         { QColor("#ff1d1f22"), QColor("#ff1c1e20"), QColor("#ff1d1f22") }, // AlternateBase
+         { QColor("#ff000000"), QColor("#ff000000"), QColor("#ff000000") }, // NoRole
+         { QColor("#ff292c30"), QColor("#ff292c30"), QColor("#ff292c30") }, // ToolTipBase
+-        { QColor("#fffcfcfc"), QColor("#fffcfcfc"), QColor("#fffcfcfc") }  // ToolTipText
++        { QColor("#fffcfcfc"), QColor("#fffcfcfc"), QColor("#fffcfcfc") }, // ToolTipText
++        { QColor("#ffa1a9b1"), QColor("#ff42464a"), QColor("#ffa1a9b1") } // PlaceholderText
+     };
+ 
+     const QVector<QPalette::ColorRole> roles {
+@@ -204,7 +205,8 @@ QPalette PaletteEditor::darkPalette()
+         QPalette::AlternateBase,
+         QPalette::NoRole,
+         QPalette::ToolTipBase,
+-        QPalette::ToolTipText
++        QPalette::ToolTipText,
++        QPalette::PlaceholderText
+     };
+ 
+     const QVector<QPalette::ColorGroup> groups {
+-- 
+2.55.0
+

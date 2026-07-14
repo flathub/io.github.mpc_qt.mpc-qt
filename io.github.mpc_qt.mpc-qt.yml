@@ -51,6 +51,10 @@ modules:
         url: https://github.com/mpc-qt/mpc-qt.git
         tag: v26.07
         commit: 6e3e9f06a6c58d1abecd4b33c152bb92115ac1ac
+      - type: patch
+        paths:
+          - mpc-qt-paletteeditor-Add-missing-color-roles.patch
+          - mpc-qt-Grey-out-palette-editor-colors-when-disabled.patch
     modules:
       - name: libmpv
         cleanup:
