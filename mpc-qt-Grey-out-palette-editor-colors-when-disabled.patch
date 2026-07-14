@@ -1,0 +1,85 @@
+From e8b633f650fc7bbe08d52558fc532a654a7e1ad0 Mon Sep 17 00:00:00 2001
+Message-ID: <e8b633f650fc7bbe08d52558fc532a654a7e1ad0.1784032397.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Sat, 11 Jul 2026 19:51:02 +0200
+Subject: [PATCH] Grey out palette editor colors when disabled
+
+Fixes #1009 ("Scrollbars in settings>player>interface don't scroll").
+---
+ src/settingswindow.cpp        |  1 +
+ src/widgets/paletteeditor.cpp | 17 ++++++++++++++++-
+ src/widgets/paletteeditor.h   |  4 ++++
+ 3 files changed, 21 insertions(+), 1 deletion(-)
+
+diff --git a/src/settingswindow.cpp b/src/settingswindow.cpp
+index c661a697..67779cac 100644
+--- a/src/settingswindow.cpp
++++ b/src/settingswindow.cpp
+@@ -1432,6 +1432,7 @@ void SettingsWindow::on_interfaceIconsTheme_currentIndexChanged(int index)
+ void SettingsWindow::on_interfaceWidgetCustom_toggled(bool checked)
+ {
+     ui->interfaceWidgetCustomScrollArea->setEnabled(checked);
++    paletteEditor->setEnabled(checked);
+ }
+ 
+ void SettingsWindow::on_interfaceIconsCustomBrowse_clicked()
+diff --git a/src/widgets/paletteeditor.cpp b/src/widgets/paletteeditor.cpp
+index 1ffc8268..ff1e335c 100644
+--- a/src/widgets/paletteeditor.cpp
++++ b/src/widgets/paletteeditor.cpp
+@@ -64,7 +64,12 @@ void PaletteBox::paintEvent(QPaintEvent *event)
+ {
+     Q_UNUSED(event)
+     QPainter p(this);
+-    p.fillRect(QRect(0,0,width(),height()), QBrush(color));
++    QColor fillColor = color;
++    if (auto const *editor = static_cast<PaletteEditor *>(parentWidget())) {
++        if (!editor->isEnabled())
++            fillColor = fillColor.darker(180);
++    }
++    p.fillRect(QRect(0,0,width(),height()), QBrush(fillColor));
+ }
+ 
+ void PaletteBox::mousePressEvent(QMouseEvent *event)
+@@ -224,6 +229,16 @@ QPalette PaletteEditor::darkPalette()
+     return dark;
+ }
+ 
++bool PaletteEditor::isEnabled() const
++{
++    return editorEnabled;
++}
++
++void PaletteEditor::setEnabled(bool enabled)
++{
++    editorEnabled = enabled;
++}
++
+ QVariant PaletteEditor::variant()
+ {
+     QVariant v = paletteToVariant(selected);
+diff --git a/src/widgets/paletteeditor.h b/src/widgets/paletteeditor.h
+index 72d86fe3..151437ed 100644
+--- a/src/widgets/paletteeditor.h
++++ b/src/widgets/paletteeditor.h
+@@ -45,6 +45,9 @@ public:
+     QPalette systemPalette();
+     QPalette darkPalette();
+ 
++    bool isEnabled() const;
++    void setEnabled(bool enabled);
++
+     // custom variant et al routines are needed for json serialisation
+     QVariant variant();
+     QPalette variantToPalette(const QVariant &v);
+@@ -68,6 +71,7 @@ private:
+     QPalette system;
+     QPalette selected;
+     BoxMap boxes;
++    bool editorEnabled = false;
+ };
+ 
+ #endif // PALETTEEDITOR_H
+-- 
+2.55.0
+
