@@ -99,8 +99,8 @@ modules:
             sources:
               - type: git
                 url: https://github.com/openresty/luajit2.git
-                tag: v2.1-20260701
-                commit: 2802aafe24b7c3b2892e616c2bee97a61e9c026e
+                tag: v2.1-20260724
+                commit: 982cd8323eafd8604a9e5f2a916aa50b9f67d9ed
                 x-checker-data:
                   type: git
                   tag-pattern: ^v([\d.-]+)$
@@ -189,8 +189,8 @@ modules:
               - name: hwdata
                 sources:
                   - type: archive
-                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.409.tar.gz
-                    sha256: 23006accc0f931dd5187d0307a57d0744e2b8feb85e73c37bc0f5229fb31eadd
+                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.410.tar.gz
+                    sha256: 2864b061b179b8ad8cb6a7339ca07678240a183d9cedce8677a4950acaf798e0
                     x-checker-data:
                       type: anitya
                       project-id: 5387
@@ -207,8 +207,8 @@ modules:
               - install yt-dlp /app/bin
             sources:
               - type: archive
-                url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2026.07.04.tar.gz
-                sha256: 7fb7ca0509dd8f21263246d3d749a346e049fa9d3cfdef072e05c7bbd88d6fc0
+                url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2026.08.19.tar.gz
+                sha256: a0779c45179a846986a852bce31bddbe9259b594574f75c0ec146d0567058f7e
                 x-checker-data:
                   type: anitya
                   project-id: 143399
@@ -241,8 +241,8 @@ modules:
           - ./b2 install variant=release link=shared runtime-link=shared --prefix=/app
         sources:
           - type: archive
-            url: https://github.com/boostorg/boost/releases/download/boost-1.91.0-1/boost-1.91.0-1-cmake.tar.gz
-            sha256: 8a82bd11a720c70923806c36ee5c26dbd2d630c1eaa1d8fad9a7bd5529908a26
+            url: https://github.com/boostorg/boost/releases/download/boost-1.92.0/boost-1.92.0-cmake.tar.gz
+            sha256: f51707c27359a0df0cac1beada86de31bb5eed5e8285592dadec384df99c2984
             x-checker-data:
               type: anitya
               project-id: 6845
