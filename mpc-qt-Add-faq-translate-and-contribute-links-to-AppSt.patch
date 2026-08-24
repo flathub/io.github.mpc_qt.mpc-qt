@@ -1,0 +1,32 @@
+From 8245dee76c4e66962581a293a1e972791ffbaf04 Mon Sep 17 00:00:00 2001
+Message-ID: <8245dee76c4e66962581a293a1e972791ffbaf04.1787563652.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Thu, 20 Aug 2026 18:22:58 +0200
+Subject: [PATCH] data: Add faq, translate and contribute links to AppStream
+ file
+
+Link: https://www.freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-url
+---
+ data/io.github.mpc_qt.mpc-qt.metainfo.xml | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/data/io.github.mpc_qt.mpc-qt.metainfo.xml b/data/io.github.mpc_qt.mpc-qt.metainfo.xml
+index bc2c8de7..ce18efd1 100644
+--- a/data/io.github.mpc_qt.mpc-qt.metainfo.xml
++++ b/data/io.github.mpc_qt.mpc-qt.metainfo.xml
+@@ -52,9 +52,12 @@
+  </screenshots>
+ 
+  <url type="homepage">https://mpc-qt.github.io/</url>
++ <url type="faq">https://github.com/mpc-qt/mpc-qt/wiki/Questions-and-answers</url>
+  <url type="help">https://github.com/mpc-qt/mpc-qt/wiki</url>
+  <url type="bugtracker">https://github.com/mpc-qt/mpc-qt/issues</url>
++ <url type="translate">https://github.com/mpc-qt/mpc-qt/wiki/Translating</url>
+  <url type="vcs-browser">https://github.com/mpc-qt/mpc-qt</url>
++ <url type="contribute">https://github.com/mpc-qt/mpc-qt/wiki/Contributing</url>
+ 
+  <recommends>
+   <control>keyboard</control>
+-- 
+2.55.0
+

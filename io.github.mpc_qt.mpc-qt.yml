@@ -55,6 +55,7 @@ modules:
         paths:
           - mpc-qt-paletteeditor-Add-missing-color-roles.patch
           - mpc-qt-Grey-out-palette-editor-colors-when-disabled.patch
+          - mpc-qt-Add-faq-translate-and-contribute-links-to-AppSt.patch
     modules:
       - name: libmpv
         cleanup:
