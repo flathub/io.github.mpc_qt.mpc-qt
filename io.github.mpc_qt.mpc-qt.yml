@@ -100,8 +100,8 @@ modules:
             sources:
               - type: git
                 url: https://github.com/openresty/luajit2.git
-                tag: v2.1-20260724
-                commit: 982cd8323eafd8604a9e5f2a916aa50b9f67d9ed
+                tag: v2.1-20261021
+                commit: 12379eb4fd2e3718387b421048307b4771fef79b
                 x-checker-data:
                   type: git
                   tag-pattern: ^v([\d.-]+)$
@@ -190,8 +190,8 @@ modules:
               - name: hwdata
                 sources:
                   - type: archive
-                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.410.tar.gz
-                    sha256: 2864b061b179b8ad8cb6a7339ca07678240a183d9cedce8677a4950acaf798e0
+                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.412.tar.gz
+                    sha256: f0c64cd7e31d70a5fb3a52e53ab50a61e74c0421a6381eaa45114eec3bde5fe7
                     x-checker-data:
                       type: anitya
                       project-id: 5387
@@ -208,8 +208,8 @@ modules:
               - install yt-dlp /app/bin
             sources:
               - type: archive
-                url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2026.08.19.tar.gz
-                sha256: a0779c45179a846986a852bce31bddbe9259b594574f75c0ec146d0567058f7e
+                url: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/2026.10.21.tar.gz
+                sha256: d3550322daafb24e1cddc55256fbc8b3b5886cdb5793444ff1ed7c08262a56fb
                 x-checker-data:
                   type: anitya
                   project-id: 143399
