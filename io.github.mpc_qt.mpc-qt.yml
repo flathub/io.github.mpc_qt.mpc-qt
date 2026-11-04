@@ -57,6 +57,7 @@ modules:
           - mpc-qt-Grey-out-palette-editor-colors-when-disabled.patch
           - mpc-qt-Add-faq-translate-and-contribute-links-to-AppSt.patch
           - mpc-qt-data-Add-display-and-modify-controls-in-metainfo.patch
+          - mpc-qt-helpers-Use-primary-screen-as-fallback-for-screenAt.patch
     modules:
       - name: libmpv
         cleanup:
