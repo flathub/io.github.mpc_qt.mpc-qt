@@ -1,0 +1,42 @@
+From d50b1cdf3426bc5244019cad426340631ea73dcd Mon Sep 17 00:00:00 2001
+Message-ID: <d50b1cdf3426bc5244019cad426340631ea73dcd.1793792191.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Mon, 26 Oct 2026 07:56:47 +0100
+Subject: [PATCH] data: Add display and modify controls in metainfo
+
+The minimum display length is for the Options Window with English
+locale; the main window requires ~440 pixels.
+
+Touch is supported but not recommended.
+---
+ data/io.github.mpc_qt.mpc-qt.metainfo.xml | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/data/io.github.mpc_qt.mpc-qt.metainfo.xml b/data/io.github.mpc_qt.mpc-qt.metainfo.xml
+index ce18efd1..3eb4d226 100644
+--- a/data/io.github.mpc_qt.mpc-qt.metainfo.xml
++++ b/data/io.github.mpc_qt.mpc-qt.metainfo.xml
+@@ -59,12 +59,19 @@
+  <url type="vcs-browser">https://github.com/mpc-qt/mpc-qt</url>
+  <url type="contribute">https://github.com/mpc-qt/mpc-qt/wiki/Contributing</url>
+ 
++ <requires>
++  <display_length compare="ge">768</display_length>
++ </requires>
++
+  <recommends>
+   <control>keyboard</control>
+   <control>pointing</control>
+-  <control>touch</control>
+  </recommends>
+ 
++ <supports>
++  <control>touch</control>
++ </supports>
++
+  <releases>
+ 
+   <release version="26.07" date="2026-07-09">
+-- 
+2.56.0
+
