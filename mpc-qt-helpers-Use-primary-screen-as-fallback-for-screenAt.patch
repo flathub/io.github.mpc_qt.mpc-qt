@@ -1,0 +1,33 @@
+From e35e4710a0e9f105cc59be5d84d85e6a178f699e Mon Sep 17 00:00:00 2001
+Message-ID: <e35e4710a0e9f105cc59be5d84d85e6a178f699e.1793792198.git.3265870+tbertels@users.noreply.github.com>
+From: Thomas Bertels <3265870+tbertels@users.noreply.github.com>
+Date: Wed, 4 Nov 2026 12:09:02 +0100
+Subject: [PATCH] helpers: Use primary screen as fallback for screenAt
+
+QGuiApplication::screenAt can return nullptr if the point
+(QCursor::pos() in this case) is outside of any screen.
+
+Fixes: 7627c48411c626f0da24fafd3f19c424411f16b7
+("helpers,main:mainwindow: fix deprecated use of desktop widget")
+
+Fixes #1166 ("Cannot get Flatpak to open properly").
+---
+ src/helpers.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/helpers.cpp b/src/helpers.cpp
+index 96483cf3..32b341a6 100644
+--- a/src/helpers.cpp
++++ b/src/helpers.cpp
+@@ -695,6 +695,8 @@ bool Helpers::pointFromString(QPoint &point, const QString &text)
+ QRect Helpers::availableGeometryFromPoint(const QPoint &point)
+ {
+     QScreen *screen = QGuiApplication::screenAt(point);
++    if (!screen)
++        screen = QGuiApplication::primaryScreen();
+     return screen->availableGeometry();
+ }
+ 
+-- 
+2.56.0
+
