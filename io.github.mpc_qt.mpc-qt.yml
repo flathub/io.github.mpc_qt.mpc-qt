@@ -81,8 +81,8 @@ modules:
           - -Ddrm=enabled
         sources:
           - type: archive
-            url: https://github.com/mpv-player/mpv/archive/refs/tags/v0.41.0.tar.gz
-            sha256: ee21092a5ee427353392360929dc64645c54479aefdb5babc5cfbb5fad626209
+            url: https://github.com/mpv-player/mpv/archive/refs/tags/v0.42.0.tar.gz
+            sha256: bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd
             x-checker-data:
               type: anitya
               project-id: 5348
@@ -192,8 +192,8 @@ modules:
               - name: hwdata
                 sources:
                   - type: archive
-                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.412.tar.gz
-                    sha256: f0c64cd7e31d70a5fb3a52e53ab50a61e74c0421a6381eaa45114eec3bde5fe7
+                    url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.413.tar.gz
+                    sha256: 5a71ab7a48c668ef912fcfdbec046949087019f8dd7fb967445d36fbeb778350
                     x-checker-data:
                       type: anitya
                       project-id: 5387
