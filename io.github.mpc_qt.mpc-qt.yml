@@ -217,18 +217,6 @@ modules:
                   is-important: true
                   url-template: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/$version.tar.gz
 
-          - name: libudfread
-            buildsystem: meson
-            sources:
-              - type: archive
-                url: https://download.videolan.org/pub/videolan/libudfread/libudfread-1.2.0.tar.xz
-                sha256: bb477cbd4cfbfc7787d9d05b71ee5e70430f5cfebf1297497f7e83547958050f
-                x-checker-data:
-                  type: anitya
-                  project-id: 89591
-                  stable-only: true
-                  url-template: https://download.videolan.org/pub/videolan/libudfread/libudfread-$version.tar.xz
-
           - name: libbluray
             buildsystem: meson
             config-opts:
@@ -243,6 +231,48 @@ modules:
                 x-checker-data:
                   type: git
                   tag-pattern: ^([\d.]+)$
+
+          - name: libdvdread
+            buildsystem: meson
+            config-opts:
+              - -Denable_docs=false
+            sources:
+              - type: archive
+                url: https://download.videolan.org/pub/videolan/libdvdread/7.1.1/libdvdread-7.1.1.tar.xz
+                sha256: a0d47876548bec806774bbf8dbf20bb19ba139464383156b32eb8e59915b90a9
+                x-checker-data:
+                  type: anitya
+                  project-id: 5614
+                  stable-only: true
+                  url-template: https://download.videolan.org/pub/videolan/libdvdread/$version/libdvdread-$version.tar.xz
+
+          - name: libdvdnav
+            buildsystem: meson
+            config-opts:
+              - -Denable_docs=false
+            sources:
+              - type: archive
+                url: https://download.videolan.org/pub/videolan/libdvdnav/7.0.0/libdvdnav-7.0.0.tar.xz
+                sha256: a2a18f5ad36d133c74bf9106b6445806fa253b09141a46392550394b647b221e
+                x-checker-data:
+                  type: anitya
+                  project-id: 5615
+                  stable-only: true
+                  url-template: https://download.videolan.org/pub/videolan/libdvdread/$version/libdvdnav-$version.tar.xz
+
+          - name: libdvdcss
+            buildsystem: meson
+            config-opts:
+              - -Denable_docs=false
+            sources:
+              - type: archive
+                url: https://download.videolan.org/pub/videolan/libdvdcss/1.6.0/libdvdcss-1.6.0.tar.xz
+                sha256: 7ea556c846b7bfc32d47b41cae56d1863a6b6d5f706bb162778d6f298490977c
+                x-checker-data:
+                  type: anitya
+                  project-id: 5568
+                  stable-only: true
+                  url-template: https://download.videolan.org/pub/videolan/libdvdcss/$version/libdvdcss-$version.tar.xz
 
       - name: quickjs
         buildsystem: simple
