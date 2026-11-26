@@ -217,6 +217,25 @@ modules:
                   is-important: true
                   url-template: https://github.com/yt-dlp/yt-dlp/archive/refs/tags/$version.tar.gz
 
+            modules:
+              - name: quickjs
+                buildsystem: simple
+                build-commands:
+                  - make
+                  - make install PREFIX=/app
+                cleanup:
+                  - /bin/qjsc
+                sources:
+                  - type: archive
+                    url: https://bellard.org/quickjs/quickjs-2026-06-04.tar.xz
+                    sha256: b376e839b322978313d929fd20663b11ba58b75df5a46c126dd19ea2fa70ad2a
+                    x-checker-data:
+                      type: anitya
+                      project-id: 138263
+                      stable-only: true
+                      is-important: true
+                      url-template: https://bellard.org/quickjs/quickjs-$version.tar.xz
+
           - name: libbluray
             buildsystem: meson
             config-opts:
@@ -273,24 +292,6 @@ modules:
                   project-id: 5568
                   stable-only: true
                   url-template: https://download.videolan.org/pub/videolan/libdvdcss/$version/libdvdcss-$version.tar.xz
-
-      - name: quickjs
-        buildsystem: simple
-        build-commands:
-          - make
-          - make install PREFIX=/app
-        cleanup:
-          - /bin/qjsc
-        sources:
-          - type: archive
-            url: https://bellard.org/quickjs/quickjs-2026-06-04.tar.xz
-            sha256: b376e839b322978313d929fd20663b11ba58b75df5a46c126dd19ea2fa70ad2a
-            x-checker-data:
-              type: anitya
-              project-id: 138263
-              stable-only: true
-              is-important: true
-              url-template: https://bellard.org/quickjs/quickjs-$version.tar.xz
 
       - name: boost
         buildsystem: simple
